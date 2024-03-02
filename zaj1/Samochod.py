@@ -9,6 +9,7 @@ class Samochod:
 
     def pokaz_informacje(self):
         print(f"Marka: {self.marka}, Model: {self.model}, Rocznik: {self.rocznik}")
+    
 
 
 # Utworzenie obiektu klasy Samochod

@@ -1,0 +1,48 @@
+
+import math
+
+class Vector3D:
+    def __init__(self, x, y, z):
+        self.x = x
+        self.y = y
+        self.z = z
+
+    def __str__(self):
+        return f"Vector3D({self.x},{self.y},{self.z})"
+    
+    def norm(self):
+        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z **2)
+    #sqrt(x^2+y^2+z^2)
+    def __add__(self,other):
+        return Vector3D(self.x+other.x,self.y+other.y,self.z+other.z)
+    
+    def __sub__(self,other):
+        return Vector3D(self.x-other.x,self.y-other.y,self.z-other.z)
+    
+    def __mul__(self,number):
+        return Vector3D(self.x*number,self.y*number,self.z*number)
+    
+    def dot(self,other):
+        return (self.x*other.x)+(self.y*other.y)+(self.z*other.z)
+    
+    def cross(self,other):
+        return Vector3D(((self.y*other.z)-(self.z*other.y)),((self.z*other.x)-(self.x*other.z)),((self.x*other.y)-(self.y*other.x)))
+    
+    @staticmethod
+    def are_orthogonal(Vector1,Vector2):
+        if ((Vector1.x*Vector2.x)+(Vector1.y*Vector2.y)+(Vector1.z*Vector2.z)) == 0:
+            print("true")
+        else:
+            print("false")
+
+VectorPierwszy = Vector3D(3,4,2)
+VectorDrugi = Vector3D(5,7,1)
+
+print (f"Vector3D({VectorPierwszy.x},{VectorPierwszy.y},{VectorPierwszy.z})")
+print (VectorPierwszy.norm())
+print (VectorPierwszy.__add__(VectorDrugi))
+print (VectorPierwszy.__sub__(VectorDrugi))
+print (VectorPierwszy.__mul__(2))
+print (VectorPierwszy.dot(VectorDrugi))
+print (VectorPierwszy.cross(VectorDrugi))
+Vector3D.are_orthogonal(VectorPierwszy,VectorDrugi)

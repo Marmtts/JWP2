@@ -62,6 +62,7 @@ def isWinner(board, player):
             (b['3'] == b['6'] == b['9'] == p) or # pionowo z prawej
             (b['3'] == b['5'] == b['7'] == p) or # przekątna 1
             (b['1'] == b['5'] == b['9'] == p)) # przekątna 2
+
 def isBoardFull(board):
     """Zwraca True, jeśli wszystkie pola na planszy są zajęte."""
     for space in ALL_SPACES:
