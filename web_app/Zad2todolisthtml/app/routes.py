@@ -7,18 +7,12 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
-# Utwórz szablon HTML index.html, który będzie zawierał formularz do
-# wprowadzania nowych zadań, listę istniejących zadań oraz przyciski do
-# usunięcia i edytowania każdego zadania.
-
 @app.route('/add', methods=['GET', 'POST'])
 def add_user():
     if request.method == 'POST':
         username = request.form['username']
-        subj = request.form['subj']
-        time = request.form['time']
-        if username and subj and time:
-            new_user = User(username=username, subj=subj,time=time)
+        if username:
+            new_user = User(username=username)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('index'))
@@ -34,3 +28,16 @@ def delete_user():
             db.session.commit()
             return redirect(url_for('index'))
     return render_template('delete_user.html')
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit_user():
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        new_username = request.form['username']
+        user = User.query.get(user_id)
+        if user and new_username:
+            user.username = new_username
+            db.session.commit()
+            return redirect(url_for('index'))
+    return render_template('edit_user.html')
+
